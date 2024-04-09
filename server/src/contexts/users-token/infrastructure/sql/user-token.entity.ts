@@ -1,6 +1,6 @@
-import { UserEntity } from '../../../../contexts/users/infrastructure/sql/user.entity';
-import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { UserEntity } from '../../../users/infrastructure/sql/user.entity';
+import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
 
 @Entity({ name: 'users_tokens' })
 export class UserTokenEntity extends TypeOrmBaseEntity {
@@ -30,13 +30,6 @@ export class UserTokenEntity extends TypeOrmBaseEntity {
     name: 'expires_at',
     nullable: false,
     select: false,
-    default: () => {
-      const fecha = new Date();
-      const minutes = fecha.getMinutes();
-
-      fecha.setMinutes(minutes + 10);
-      return fecha;
-    },
   })
   expiresAt: Date;
 }

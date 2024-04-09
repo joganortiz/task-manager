@@ -24,7 +24,7 @@ export const DataSourceConfig: DataSourceOptions = {
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
   subscribers: [],
-  migrationsTableName: 'task_manager_migrations',
+  //migrationsTableName: 'task_manager_migrations',
   connectorPackage: 'mysql2',
 };
 
