@@ -1,8 +1,7 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 import { UserTokenEntity } from '../../../../contexts/users-token/infrastructure/sql/user-token.entity';
 import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
-import { NoteEntity } from '../../../../contexts/notes/infrastructure/sql/note.entity';
-import { UserTaskEntity } from '../../../../contexts/users-tasks/infrastructure/sql/user-task.entity';
+import { ProjectEntity } from '../../../../contexts/project/infrastructure/sql/project.entity';
 
 export enum ConfirmedType {
   CONFIRMED = '1',
@@ -67,10 +66,6 @@ export class UserEntity extends TypeOrmBaseEntity {
   @OneToMany(() => UserTokenEntity, (userToken) => userToken.user)
   user: UserTokenEntity[];
 
-  @OneToMany(() => NoteEntity, (note) => note.createdBy)
-  createdBy: NoteEntity[];
-
-  @ManyToMany(() => UserTaskEntity, (userTask) => userTask.users)
-  @JoinTable()
-  userTask: UserTaskEntity[];
+  @OneToOne(() => ProjectEntity, (project) => project.manager)
+  manager: ProjectEntity;
 }

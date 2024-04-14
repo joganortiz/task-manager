@@ -1,7 +1,6 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
-import { UserTaskEntity } from '../../../../contexts/users-tasks/infrastructure/sql/user-task.entity';
-import { NoteEntity } from '../../../../contexts/notes/infrastructure/sql/note.entity';
+import { ProjectEntity } from '../../../../contexts/project/infrastructure/sql/project.entity';
 
 export enum StatusType {
   PENDING = 'pending',
@@ -39,10 +38,13 @@ export class TaskEntity extends TypeOrmBaseEntity {
   })
   status: StatusType;
 
-  @ManyToMany(() => UserTaskEntity)
-  @JoinTable()
-  user: UserTaskEntity[];
-
-  @ManyToMany(() => NoteEntity, (note) => note.NoteTaskId)
-  NoteTaskId: NoteEntity[];
+  @ManyToOne(() => ProjectEntity, (project) => project.tasks, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({
+    name: 'project_id',
+    foreignKeyConstraintName: 'FK_task_project_id',
+  })
+  project: ProjectEntity;
 }
