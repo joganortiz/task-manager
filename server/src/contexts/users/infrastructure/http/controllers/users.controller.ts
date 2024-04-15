@@ -79,6 +79,6 @@ export class UsersController {
     )
     id: string,
   ) {
-    return new UserRemoveUseCase(this._inMysqlUserRepository).run(+id);
+    return new UserRemoveUseCase(this._inMysqlUserRepository).run(id);
   }
 }

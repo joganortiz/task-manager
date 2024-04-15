@@ -40,14 +40,13 @@ export class InMysqlUserRepository implements UserRepository {
     prepareUpdate.email = user.email._value;
     prepareUpdate.password = user.password._value;
     prepareUpdate.confirmed = user.confirmed._value;
-    UserEntity.update({ id: id._value }, prepareUpdate);
+    UserEntity.update({ _id: id._value }, prepareUpdate);
 
-    return User.fromPrimitives(user);
+    return user;
   }
 
-  async remove(id: number): Promise<User> {
-    console.log('llego a borrar usuario', id);
-    return {} as User;
+  async remove(id: UserId): Promise<void> {
+    await UserEntity.delete({ _id: id._value });
   }
 
   async findBy({
@@ -63,8 +62,8 @@ export class InMysqlUserRepository implements UserRepository {
       { [key]: value };
 
     // validate exist _id
-    if (_id) {
-      where['id'] = Not(_id._value);
+    if (_id != undefined) {
+      where['_id'] = Not(_id._value);
     }
 
     // validate exist user

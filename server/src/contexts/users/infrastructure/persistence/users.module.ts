@@ -8,6 +8,6 @@ import { UserEntity } from '../sql/user.entity';
   imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UsersController],
   providers: [InMysqlUserRepository],
-  exports: [],
+  exports: [InMysqlUserRepository],
 })
 export class UsersModule {}

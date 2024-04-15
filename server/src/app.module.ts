@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSourceConfig } from './config/TypeOrmClientFactory';
 import { UsersModule } from './contexts/users/infrastructure/persistence/users.module';
+import { ProjectModule } from './contexts/project/infrastructure/persistence/project.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { UsersModule } from './contexts/users/infrastructure/persistence/users.m
     }),
     TypeOrmModule.forRoot(DataSourceConfig),
     UsersModule,
+    ProjectModule,
   ],
 })
 export class AppModule {}
