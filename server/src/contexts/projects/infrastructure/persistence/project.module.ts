@@ -9,5 +9,6 @@ import { InMysqlUserRepository } from 'src/contexts/users/infrastructure/impleme
   imports: [TypeOrmModule.forFeature([ProjectEntity])],
   controllers: [ProjectController],
   providers: [InMysqlProjectRepository, InMysqlUserRepository],
+  //exports: [InMysqlProjectRepository],
 })
 export class ProjectModule {}

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
 import { UserEntity } from '../../../../contexts/users/infrastructure/sql/user.entity';
 import { TaskEntity } from '../../../../contexts/tasks/infrastructure/sql/task.entity';
@@ -29,7 +29,7 @@ export class ProjectEntity extends TypeOrmBaseEntity {
   })
   description: string;
 
-  @OneToOne(() => UserEntity, (user) => user.manager, {
+  @ManyToOne(() => UserEntity, (user) => user.manager, {
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT',
     nullable: true,

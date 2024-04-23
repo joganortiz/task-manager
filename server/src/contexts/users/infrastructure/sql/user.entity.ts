@@ -1,7 +1,7 @@
-import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { UserTokenEntity } from '../../../../contexts/users-token/infrastructure/sql/user-token.entity';
 import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
-import { ProjectEntity } from '../../../../contexts/project/infrastructure/sql/project.entity';
+import { ProjectEntity } from '../../../../contexts/projects/infrastructure/sql/project.entity';
 
 export enum ConfirmedType {
   CONFIRMED = '1',
@@ -66,6 +66,6 @@ export class UserEntity extends TypeOrmBaseEntity {
   @OneToMany(() => UserTokenEntity, (userToken) => userToken.user)
   user: UserTokenEntity[];
 
-  @OneToOne(() => ProjectEntity, (project) => project.manager)
+  @OneToMany(() => ProjectEntity, (project) => project.manager)
   manager: ProjectEntity;
 }

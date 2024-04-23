@@ -9,16 +9,16 @@ import {
 } from '@nestjs/common';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
+import { InMysqlProjectRepository } from '../../implementations';
+import { InMysqlUserRepository } from 'src/contexts/users/infrastructure/implementations/InMysqlUserRepository';
+import { uuid } from 'src/plugins/uuid';
 import {
   ProjectCreateUseCase,
   ProjectFindAllUseCase,
   ProjectFindOneUseCase,
-  ProjectUpdateUseCase,
   ProjectRemoveUseCase,
-} from 'src/contexts/project/application/use-cases';
-import { InMysqlProjectRepository } from '../../implementations';
-import { InMysqlUserRepository } from 'src/contexts/users/infrastructure/implementations/InMysqlUserRepository';
-import { uuid } from 'src/plugins/uuid';
+  ProjectUpdateUseCase,
+} from 'src/contexts/projects/application/use-cases';
 
 @Controller('project')
 export class ProjectController {

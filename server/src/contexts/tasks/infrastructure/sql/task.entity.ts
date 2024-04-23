@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
-import { ProjectEntity } from '../../../../contexts/project/infrastructure/sql/project.entity';
+import { ProjectEntity } from '../../../../contexts/projects/infrastructure/sql/project.entity';
 
 export enum StatusType {
   PENDING = 'pending',

@@ -42,4 +42,20 @@ export class Project {
       manager: this.manager.toPrimitives(),
     };
   }
+
+  static fromPrimitives(primitives: {
+    _id: string;
+    name: string;
+    clientName: string;
+    description: string;
+    manager: any;
+  }) {
+    return new Project({
+      _id: new ProjectId(primitives._id),
+      name: new ProjectName(primitives.name),
+      clientName: new ProjectClienteName(primitives.clientName),
+      description: new ProjectDescription(primitives.description),
+      manager: User.fromPrimitives(primitives.manager) ?? null,
+    });
+  }
 }
