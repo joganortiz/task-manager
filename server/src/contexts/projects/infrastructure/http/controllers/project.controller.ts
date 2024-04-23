@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  ParseUUIDPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { UpdateProjectDto } from '../dto/update-project.dto';
@@ -38,21 +40,52 @@ export class ProjectController {
 
   @Get()
   findAll() {
-    return new ProjectFindAllUseCase().run();
+    return new ProjectFindAllUseCase(this._inMysqlProjectRepository).run();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return new ProjectFindOneUseCase().run(id);
+  findOne(
+    @Param(
+      'id',
+      new ParseUUIDPipe({
+        version: '4',
+        exceptionFactory: () => new BadRequestException('User not found'),
+      }),
+    )
+    id: string,
+  ) {
+    return new ProjectFindOneUseCase(this._inMysqlProjectRepository).run(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-    return new ProjectUpdateUseCase().run(id, updateProjectDto);
+  update(
+    @Param(
+      'id',
+      new ParseUUIDPipe({
+        version: '4',
+        exceptionFactory: () => new BadRequestException('User not found'),
+      }),
+    )
+    id: string,
+    @Body() updateProjectDto: UpdateProjectDto,
+  ) {
+    return new ProjectUpdateUseCase(this._inMysqlProjectRepository).run(
+      id,
+      updateProjectDto,
+    );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return new ProjectRemoveUseCase().run(id);
+  remove(
+    @Param(
+      'id',
+      new ParseUUIDPipe({
+        version: '4',
+        exceptionFactory: () => new BadRequestException('User not found'),
+      }),
+    )
+    id: string,
+  ) {
+    return new ProjectRemoveUseCase(this._inMysqlProjectRepository).run(id);
   }
 }

@@ -33,6 +33,22 @@ export class Project {
     this.manager = manager;
   }
 
+  static create(
+    _id: ProjectId,
+    name: ProjectName,
+    clientName: ProjectClienteName,
+    description: ProjectDescription,
+    manager: User,
+  ): Project {
+    return new Project({
+      _id,
+      name,
+      clientName,
+      description,
+      manager,
+    });
+  }
+
   toPrimitives() {
     return {
       _id: this._id._value,

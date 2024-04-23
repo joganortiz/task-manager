@@ -12,8 +12,7 @@ export class UserRemoveUseCase {
     const user: User = await this._userFindOne.run(_id);
 
     await this._userRepository.remove(user._id);
-    const userDelete = User.fromPrimitives(user.toPrimitives());
 
-    return userDelete.toPrimitives();
+    return user.toPrimitives();
   }
 }

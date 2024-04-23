@@ -3,7 +3,9 @@ import { User } from '../../domain/user.entity';
 import { UserRepository } from '../../domain/userRepository';
 import { UserId } from '../../domain/value-objects';
 import { UserEntity } from '../sql/user.entity';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class InMysqlUserRepository implements UserRepository {
   async create(user: User): Promise<User> {
     const prepareUser = new UserEntity();
