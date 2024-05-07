@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSourceConfig } from './config/TypeOrmClientFactory';
 import { UsersModule } from './contexts/users/infrastructure/persistence/users.module';
 import { ProjectModule } from './contexts/projects/infrastructure/persistence/project.module';
+import { AuthModule } from './contexts/auth/infrastructure/persistence/auth.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ProjectModule } from './contexts/projects/infrastructure/persistence/pr
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(DataSourceConfig),
+    AuthModule,
     UsersModule,
     ProjectModule,
   ],

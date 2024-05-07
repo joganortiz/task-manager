@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToMany } from 'typeorm';
 import { UserTokenEntity } from '../../../../contexts/users-token/infrastructure/sql/user-token.entity';
 import { TypeOrmBaseEntity } from '../../../../config/TypeOrmBaseEntity';
 import { ProjectEntity } from '../../../../contexts/projects/infrastructure/sql/project.entity';
@@ -8,7 +8,10 @@ export enum ConfirmedType {
   NOT_CONFIRMED = '0',
 }
 
-@Entity({ name: 'users' })
+@Entity({ name: 'users', orderBy: {
+  createdAt: "DESC",
+  _id: "DESC"
+} })
 export class UserEntity extends TypeOrmBaseEntity {
   @Column({
     type: 'varchar',

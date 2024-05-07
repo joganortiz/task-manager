@@ -26,7 +26,7 @@ export class UserCreateUseCase {
     const createUser = new User({
       _id: new UserId(await this._uuid.generate()),
       name: new UserName(createUserDto.name),
-      lastName: new UserLastName(createUserDto.last_name),
+      lastName: new UserLastName(createUserDto.lastName),
       email: new UserEmail(createUserDto.email),
       password: new UserPassword(createUserDto.password),
     });

@@ -30,7 +30,7 @@ export class UserUpdateUseCase {
     const userUpdate = User.create(
       user._id,
       new UserName(updateUserDto.name ?? user.name._value),
-      new UserLastName(updateUserDto.last_name ?? user.lastName._value),
+      new UserLastName(updateUserDto.lastName ?? user.lastName._value),
       new UserEmail(updateUserDto.email ?? user.email._value),
       new UserPassword(updateUserDto.password ?? user.password._value),
       new UserConfirmed(updateUserDto?.confirmed ?? user.confirmed._value),

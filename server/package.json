@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "set NODE_ENV=development && nest start --watch",
+    "start:dev": "export NODE_ENV=development && nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -19,9 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "orm:init": "typeorm-ts-node-commonjs -d ./src/config/TypeOrmClientFactory.ts",
-    "m:gen": "set NODE_ENV=development && yarn run orm:init migration:generate",
-    "m:run": "set NODE_ENV=development && yarn run orm:init migration:run",
-    "m:drop": "set NODE_ENV=development && yarn run orm:init schema:drop"
+    "m:gen": "export NODE_ENV=development && yarn run orm:init migration:generate",
+    "m:run": "export NODE_ENV=development && yarn run orm:init migration:run",
+    "m:drop": "export NODE_ENV=development && yarn run orm:init schema:drop"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
